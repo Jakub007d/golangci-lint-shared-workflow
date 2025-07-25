@@ -17,6 +17,16 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Log workflow execution
+        run: |
+          echo "🎯 CENTRALIZED GOLANGCI-LINT IS RUNNING!"
+          echo "📝 Repository: ${{ github.repository }}"
+          echo "🔀 Event: ${{ github.event_name }}"
+          echo "🌿 Ref: ${{ github.ref }}"
+          echo "⚙️ Golangci version: ${{ inputs.golangci-version }}"
+          echo "🔍 Only new issues: ${{ inputs.only-new-issues }}"
+          echo "✅ Using shared golangci-lint workflow"
+          
       - uses: actions/checkout@v4
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v7
