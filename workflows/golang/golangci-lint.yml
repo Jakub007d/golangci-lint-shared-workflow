@@ -1,0 +1,25 @@
+# org/ci-shared/.github/workflows/golangci-lint.yml
+name: golangci-lint
+on:
+  workflow_call:
+    inputs:
+      only-new-issues:
+        required: false
+        type: boolean
+        default: true
+      golangci-version:
+        required: false
+        type: string
+        default: latest
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v7
+        with:
+          version: ${{ inputs.golangci-version }}
+          only-new-issues: ${{ inputs.only-new-issues }}
